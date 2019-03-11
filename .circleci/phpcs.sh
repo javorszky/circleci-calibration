@@ -50,4 +50,11 @@ then
 	exit 0
 fi
 
+if [ ! -f phpcs.xml ]
+then
+	echo "No phpcs.xml file found. Nothing to do."
+	exit 0
+fi
+
+echo "Running phpcs..."
 ./vendor/bin/phpcs $changed_files
