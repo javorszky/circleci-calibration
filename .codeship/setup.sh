@@ -8,21 +8,3 @@ fi
 
 ./vendor/bin/phpcs --config-set installed_paths $HOME/cache/wpcs
 ./vendor/bin/phpcs -i
-
-url="https://api.github.com/repos/$CI_REPO_NAME/pulls/$CI_PR_NUMBER"
-
-target_branch=$(curl -s -X GET -G \
-$url \
--d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
-
-echo "Target branch is $target_branch"
-
-git remote set-branches --add origin $target_branch
-git fetch origin $target_branch:$target_branch
-
-git checkout $target_branch
-git status
-git rev-parse HEAD
-git checkout $CI_BRANCH
-git status
-git rev-parse HEAD
