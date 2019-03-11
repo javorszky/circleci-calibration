@@ -8,15 +8,12 @@ else
 	echo "This is a pull request, continuing"
 fi
 
-# Get wpcs
-echo "Grabbing WordPress Coding Standards"
-git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
-
-echo "Adding WPCS to phpcs path"
-./vendor/bin/phpcs --config-set installed_paths $(pwd)/wpcs
-
-echo "Checking installed paths"
-./vendor/bin/phpcs -i
+# Check if phpcs.xml is present. Don't do anything if it isn't.
+if [ ! -f phpcs.xml ]
+then
+	echo "No phpcs.xml file found. Nothing to do."
+	exit 0
+fi
 
 regexp="[[:digit:]]\+$"
 PR_NUMBER=`echo $CIRCLE_PULL_REQUEST | grep -o $regexp`
@@ -35,11 +32,11 @@ $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
 echo "Resetting $target_branch to where the remote version is..."
-git checkout $target_branch
+git checkout -q $target_branch
 
-git reset --hard origin/$target_branch
+git reset --hard -q origin/$target_branch
 
-git checkout $CIRCLE_BRANCH
+git checkout -q $CIRCLE_BRANCH
 
 echo "Getting list of changed files..."
 changed_files=$(git diff --name-only $target_branch..$CIRCLE_BRANCH -- '*.php')
@@ -50,11 +47,15 @@ then
 	exit 0
 fi
 
-if [ ! -f phpcs.xml ]
-then
-	echo "No phpcs.xml file found. Nothing to do."
-	exit 0
-fi
+# Get wpcs
+echo "Grabbing WordPress Coding Standards"
+git clone -b -q master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
+
+echo "Adding WPCS to phpcs path"
+./vendor/bin/phpcs --config-set installed_paths $(pwd)/wpcs
+
+echo "Checking installed paths"
+./vendor/bin/phpcs -i
 
 echo "Running phpcs..."
 ./vendor/bin/phpcs $changed_files
