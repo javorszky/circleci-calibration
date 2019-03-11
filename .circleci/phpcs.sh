@@ -39,9 +39,9 @@ target_branch=$(curl -X GET -G \
 $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
-echo "PR number from circle is $CIRCLE_PR_NUMBER <-"
+echo "PR number from circle is $PR_NUMBER <-"
 
-git status
+git fetch --force origin "$target_branch:remotes/origin/$target_branch"
 
 git checkout $target_branch
 
