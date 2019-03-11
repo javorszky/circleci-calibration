@@ -9,7 +9,7 @@ fi
 ./vendor/bin/phpcs --config-set installed_paths $HOME/cache/wpcs
 ./vendor/bin/phpcs -i
 
-url="https://api.github.com/repos/$CI_REPO_NAME/pulls/$CIPR_NUMBER"
+url="https://api.github.com/repos/$CI_REPO_NAME/pulls/$CI_PR_NUMBER"
 
 target_branch=$(curl -s -X GET -G \
 $url \
