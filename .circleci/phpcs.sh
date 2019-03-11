@@ -26,7 +26,7 @@ then
 	exit 1
 fi
 
-target_branch=$(curl -Xs GET -G \
+target_branch=$(curl -s -X GET -G \
 $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
