@@ -1,5 +1,8 @@
 changed_files=$(git diff --name-only $target_branch..$CI_BRANCH -- '*.php')
 
+echo "target branch is $target_branch"
+echo "ci branch is $CI_BRANCH"
+
 if [[ -z $changed_files ]]
 then
 	echo "There are no files to check."

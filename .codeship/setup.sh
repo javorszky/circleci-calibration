@@ -22,5 +22,7 @@ git fetch origin $target_branch:$target_branch
 
 git checkout $target_branch
 git status
+git rev-parse HEAD
 git checkout $CI_BRANCH
 git status
+git rev-parse HEAD
