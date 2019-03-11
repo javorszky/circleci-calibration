@@ -1,5 +1,5 @@
 <?php
 function foo()
 {
-	echo "bla".strlen("herp");
+	echo "bla" . strlen("herp");
 }
