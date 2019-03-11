@@ -46,6 +46,10 @@ git checkout $target_branch
 git reset --hard origin/$target_branch
 
 git status
+
+git checkout $CIRCLE_BRANCH
+
+git status
 # echo "Fetching target branch: $target_branch"
 # git fetch origin
 
