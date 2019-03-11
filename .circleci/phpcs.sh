@@ -26,7 +26,7 @@ then
 	exit 1
 fi
 
-target_branch=$(curl -X GET -G \
+target_branch=$(curl -Xs GET -G \
 $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
@@ -48,7 +48,7 @@ fi
 
 # Get wpcs
 echo "Grabbing WordPress Coding Standards"
-git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
+git clone -q -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
 
 echo "Adding WPCS to phpcs path"
 ./vendor/bin/phpcs --config-set installed_paths $(pwd)/wpcs
