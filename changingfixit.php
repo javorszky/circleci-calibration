@@ -2,7 +2,6 @@
 /**
  * A file that contains fixable phpcs violations.
  *
- * @package javorszky/circleci-calibration
  */
 
 /**
