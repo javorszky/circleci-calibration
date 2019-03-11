@@ -17,7 +17,6 @@ fi
 
 regexp="[[:digit:]]\+$"
 PR_NUMBER=`echo $CIRCLE_PULL_REQUEST | grep -o $regexp`
-echo "PR number is $PR_NUMBER"
 
 url="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$PR_NUMBER"
 
@@ -49,7 +48,7 @@ fi
 
 # Get wpcs
 echo "Grabbing WordPress Coding Standards"
-git clone -b -q master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
+git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
 
 echo "Adding WPCS to phpcs path"
 ./vendor/bin/phpcs --config-set installed_paths $(pwd)/wpcs
