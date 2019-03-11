@@ -11,5 +11,5 @@
  * @return string
  */
 function foo() {
-	return 'bla' . strlen( 'herp' ) . 'derp';
+	return 'bla' . strlen( 'herp' ) . 'derp' . 's';
 }
