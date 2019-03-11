@@ -17,3 +17,6 @@ $url \
 
 git remote set-branches --add origin $target_branch
 git fetch origin $target_branch:$target_branch
+
+git checkout $target_branch
+git checkout $CI_BRANCH
