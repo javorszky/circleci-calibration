@@ -34,12 +34,14 @@ target_branch=$(curl -X GET -G \
 $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
+echo "Resetting $target_branch to where the remote version is..."
 git checkout $target_branch
 
 git reset --hard origin/$target_branch
 
 git checkout $CIRCLE_BRANCH
 
+echo "Getting list of changed files..."
 changed_files=$(git diff --name-only $target_branch..$CIRCLE_BRANCH -- '*.php')
 
 if [[ -z $changed_files ]]
