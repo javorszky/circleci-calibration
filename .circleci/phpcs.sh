@@ -41,9 +41,9 @@ $url \
 
 echo "PR number from circle is $PR_NUMBER <-"
 
-git fetch --force origin "$target_branch:remotes/origin/$target_branch"
-
 git checkout $target_branch
+
+git reset --hard origin/$target_branch
 
 git status
 # echo "Fetching target branch: $target_branch"
