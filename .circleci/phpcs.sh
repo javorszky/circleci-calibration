@@ -64,7 +64,7 @@ echo "End of changed files"
 
 if [[ -z $changed_files ]]
 then
-	echo "There are no files to check."
+	echo "There are no files to check, boo."
 	exit 0
 fi
 
