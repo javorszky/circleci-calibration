@@ -15,8 +15,12 @@ target_branch=$(curl -s -X GET -G \
 $url \
 -d access_token=$GITHUB_TOKEN | jq '.base.ref' | tr -d '"')
 
+echo "Target branch is $target_branch"
+
 git remote set-branches --add origin $target_branch
 git fetch origin $target_branch:$target_branch
 
 git checkout $target_branch
+git status
 git checkout $CI_BRANCH
+git status
