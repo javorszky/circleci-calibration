@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="Mindsize Ruleset">
+	<description>Apply WordPress Coding Standards to all plugin and theme files</description>
+
+	<rule ref="WordPress-Extra"/>
+	<rule ref="WordPress-Docs"/>
+
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/wp-content/vendor/*</exclude-pattern>
+	<exclude-pattern>/cms/*</exclude-pattern>
+</ruleset>
