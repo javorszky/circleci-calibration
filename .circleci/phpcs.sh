@@ -15,16 +15,16 @@ then
 	exit 0
 fi
 
-regexp="[[:digit:]]\+$"
-PR_NUMBER=`echo $CIRCLE_PULL_REQUEST | grep -o $regexp`
-
-url="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$PR_NUMBER"
-
 if [[ -z $GITHUB_TOKEN ]];
 then
 	echo "GITHUB_TOKEN not set"
 	exit 1
 fi
+
+regexp="[[:digit:]]\+$"
+PR_NUMBER=`echo $CIRCLE_PULL_REQUEST | grep -o $regexp`
+
+url="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$PR_NUMBER"
 
 target_branch=$(curl -s -X GET -G \
 $url \
