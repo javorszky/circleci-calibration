@@ -38,7 +38,7 @@ git reset --hard -q origin/$target_branch
 git checkout -q $CIRCLE_BRANCH
 
 echo "Getting list of changed files..."
-changed_files=$(git diff --name-only $target_branch..$CIRCLE_BRANCH -- '*.php')
+changed_files=$(git diff --name-only --diff-filter=AM $target_branch..$CIRCLE_BRANCH -- '*.php')
 
 if [[ -z $changed_files ]]
 then
